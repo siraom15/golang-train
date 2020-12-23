@@ -1,33 +1,32 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"encoding/json"
+)
+
+type person struct{
+	Name string
+	Age int
+}
 
 func main() {
-	var aom student = student{"Siriwat", 24, 4.00, true}
-	fmt.Println(aom)
+	persons := []person{}
 
-	person := struct {
-		name    string
-		age     int16
-		career  string
-		isAlive bool
-	}{
-		name:    "none",
-		age:     0,
-		career:  "none",
-		isAlive: true,
+	aom := person{Name : "aom", Age : 19};
+	au := person{Name : "au", Age :20};
+
+	persons = append(persons, aom);
+	persons = append(persons, au);
+	fmt.Println(persons)
+
+	jsonData, err := json.Marshal(persons);
+	
+	if err != nil{
+		fmt.Println(err);
 	}
-	var aom2 = person
-	fmt.Println(aom2)
+	
+	fmt.Println(string(jsonData));
+
+
 }
-
-//zero value
-type student struct {
-	name      string
-	age       int16
-	gpa       float32
-	isStudent bool
-}
-
-//set default value
-
